@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smida-tape"
+version = "1.0.0"
+description = "Ukrainian Consolidated Tape (UCT): an open-source engine for exchange trading microstructure data in Ukraine (2019-2025)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Academic use — see README (data rights remain with SMIDA and the exchanges)" }
+authors = [{ name = "Stanislav Fishchuk" }]
+keywords = ["market-microstructure", "consolidated-tape", "SMIDA", "PFTS", "Ukrainian-Exchange", "parquet", "OHLCV"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "httpx[http2]>=0.27,<0.29",
+    "tenacity>=8.2,<10",
+    "selectolax>=0.3.21,<1.1",
+    "pandas>=2.2,<3.0",
+    "pyarrow>=15,<27",
+    "click>=8.1,<9",
+]
+
+[project.urls]
+Homepage = "https://github.com/stanfishchuk/ukrainian-consolidated-tape"
+Repository = "https://github.com/stanfishchuk/ukrainian-consolidated-tape"
+Issues = "https://github.com/stanfishchuk/ukrainian-consolidated-tape/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "ruff>=0.6"]
+dashboard = ["streamlit>=1.36,<2", "plotly>=5.22,<8"]
+
+[project.scripts]
+smida-tape = "smida_tape.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["smida_tape*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-q"

@@ -1,0 +1,27 @@
+name: smida-tape
+
+services:
+  smida-tape:
+    build:
+      context: .
+      # На Apple Silicon збірка йде нативно під arm64.
+      # platform: linux/arm64
+    image: smida-tape:1.0.0
+    init: true
+    restart: "no"
+    environment:
+      SMIDA_HOME: /data
+      SMIDA_MAX_RPS: "${SMIDA_MAX_RPS:-2}"
+      SMIDA_LOG_LEVEL: "${SMIDA_LOG_LEVEL:-INFO}"
+      SMIDA_USER_AGENT: "${SMIDA_USER_AGENT:-smida-tape/1.0 (academic research pipeline)}"
+    volumes:
+      # Дані живуть на хості: контейнер можна вільно перезапускати.
+      - ./storage:/data/storage
+      - ./output:/data/output
+    # Бекграунд-режим: docker compose up -d
+    command: ["pipeline", "--start", "2015-01-01", "--end", "2025-12-31"]
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"

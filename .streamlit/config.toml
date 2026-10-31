@@ -1,0 +1,15 @@
+# UCT Terminal — dark, monospaced, market-terminal look.
+# Committed on purpose: Streamlit Cloud applies this theme on deploy.
+[theme]
+base = "dark"
+primaryColor = "#ffb300"
+backgroundColor = "#0b0e14"
+secondaryBackgroundColor = "#121722"
+textColor = "#e6e6e6"
+font = "monospace"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

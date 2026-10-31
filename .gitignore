@@ -1,0 +1,102 @@
+# =============================================================================
+# Ukrainian Consolidated Tape (UCT) — .gitignore
+#
+# HARD RULE: no databases, no raw market data, no secrets are ever committed.
+# The repository ships code only; data is reproduced locally by the pipeline.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Data & databases (NEVER commit)
+#
+# NOTE: `output/` is ignored by CONTENTS (`output/*`), not as a directory.
+# Git cannot re-include a file whose parent directory is excluded, so the
+# public dataset exceptions below would silently stop working with `output/`.
+# -----------------------------------------------------------------------------
+storage/
+logs/
+data/
+output/*
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.parquet
+*.feather
+*.arrow
+*.duckdb
+*.csv.gz
+metadata.db*
+
+# -----------------------------------------------------------------------------
+# 1b. EXCEPTIONS — published datasets served to the Streamlit Cloud dashboard.
+# Kept in version control on purpose: the hosted app has no access to the raw
+# crawl and must be able to read a ready-made tape straight from the repo.
+# -----------------------------------------------------------------------------
+!output/consolidated_tape_2015_2025.parquet
+!output/daily_bars.parquet
+
+# -----------------------------------------------------------------------------
+# 2. Secrets & local configuration (NEVER commit)
+#    `.env.*` is ignored in full — the template lives in the README, not on disk.
+# -----------------------------------------------------------------------------
+.env
+.env.*
+*.pem
+*.key
+secrets/
+.streamlit/secrets.toml
+
+# -----------------------------------------------------------------------------
+# 3. Virtual environments & Python artefacts
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.python-version
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+build/
+dist/
+.eggs/
+pip-wheel-metadata/
+.installed.cfg
+
+# -----------------------------------------------------------------------------
+# 4. Tooling caches
+# -----------------------------------------------------------------------------
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# -----------------------------------------------------------------------------
+# 5. Editors & OS
+# -----------------------------------------------------------------------------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+.cursor/
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+
+# -----------------------------------------------------------------------------
+# 6. Docker / misc
+# -----------------------------------------------------------------------------
+.docker/
+*.log

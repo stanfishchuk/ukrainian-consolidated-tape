@@ -1,0 +1,21 @@
+# =============================================================================
+# Ukrainian Consolidated Tape (UCT) — runtime dependencies
+#
+# Single source of truth for: local installs, the Docker image, GitHub Actions
+# (daily EOD job) and Streamlit Cloud (which installs this file verbatim).
+# Keep it in sync with pyproject.toml.
+# =============================================================================
+
+# --- core pipeline -----------------------------------------------------------
+httpx[http2]>=0.27,<0.29
+tenacity>=8.2,<10
+selectolax>=0.3.21,<1.1
+click>=8.1,<9
+
+# --- data engine (required by the pipeline AND the dashboard) ----------------
+pandas>=2.2,<3.0
+pyarrow>=15,<27
+
+# --- dashboard (required by Streamlit Cloud) ---------------------------------
+streamlit>=1.36.0,<2
+plotly>=5.20.0,<8

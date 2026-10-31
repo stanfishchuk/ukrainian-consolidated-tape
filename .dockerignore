@@ -1,0 +1,15 @@
+.git
+.gitignore
+.venv
+__pycache__
+.pytest_cache
+.ruff_cache
+build
+*.egg-info
+tests
+storage
+output
+.env
+*.db
+*.db-wal
+*.db-shm
